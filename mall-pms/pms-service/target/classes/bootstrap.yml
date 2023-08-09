@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: pms-service
+  profiles:
+    active: dev

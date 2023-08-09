@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.cjj.common.web.config.WebMvcConfig,\
+  com.cjj.common.web.exception.GlobalExceptionHandler
