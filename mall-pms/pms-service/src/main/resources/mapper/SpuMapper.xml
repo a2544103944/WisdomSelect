@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cjj.pms.mapper.SpuMapper">
+
+    <resultMap id="BaseResultMap" type="com.cjj.pms.pojo.entity.Spu">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="name" column="name" jdbcType="VARCHAR"/>
+            <result property="categoryId" column="category_id" jdbcType="BIGINT"/>
+            <result property="price" column="price" jdbcType="INTEGER"/>
+            <result property="sales" column="sales" jdbcType="INTEGER"/>
+            <result property="img" column="img" jdbcType="VARCHAR"/>
+            <result property="imgList" column="img_list"
+            typeHandler="com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler"/>
+            <result property="detail" column="detail" jdbcType="VARCHAR"/>
+            <result property="status" column="status" jdbcType="TINYINT"/>
+            <result property="specList" column="spec_list"
+                    typeHandler="com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+</mapper>
