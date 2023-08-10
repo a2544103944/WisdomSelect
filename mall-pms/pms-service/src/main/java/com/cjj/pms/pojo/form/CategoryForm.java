@@ -1,6 +1,5 @@
 package com.cjj.pms.pojo.form;
 import lombok.Data;
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -16,7 +15,6 @@ public class CategoryForm {
     /**
      * 父ID
      */
-
     private Long parentId;
 
     /**
