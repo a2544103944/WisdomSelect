@@ -20,4 +20,68 @@
             <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
             <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
     </resultMap>
+
+    <resultMap id="SpuVOResultMap" type="com.cjj.pms.pojo.vo.SpuVO">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="categoryId" column="category_id" jdbcType="BIGINT"/>
+        <result property="categoryName"
+                column="category_name" jdbcType="VARCHAR"/>
+        <result property="price" column="price" jdbcType="INTEGER"/>
+        <result property="sales" column="sales" jdbcType="INTEGER"/>
+        <result property="img" column="img" jdbcType="VARCHAR"/>
+        <result property="imgList" column="img_list" typeHandler=
+                "com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler"/>
+        <result property="detail" column="detail" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="TINYINT"/>
+        <result property="specList" column="spec_list" typeHandler=
+                "com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler"/>
+
+        <collection property="skuList"
+                    ofType="com.cjj.pms.pojo.entity.Sku">
+            <id property="id" column="sku_id" jdbcType="BIGINT"/>
+            <result property="spuId" column="spu_id" jdbcType="BIGINT"/>
+            <result property="name" column="sku_name" jdbcType="VARCHAR"/>
+            <result property="price" column="sku_price" jdbcType="INTEGER"/>
+            <result property="stock" column="sku_stock" jdbcType="INTEGER"/>
+            <result property="specValueList" column="spec_value_list"
+                    typeHandler="com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler"/>
+            <result property="status" column="sku_status" jdbcType="INTEGER"/>
+        </collection>
+    </resultMap>
+
+    <sql id="selectSpu">
+        SELECT t1.*,
+               t2.`name`   category_name,
+               t3.id       sku_id,
+               t3.spu_id,
+               t3.`name`   sku_name,
+               t3.price    sku_price,
+               t3.stock    sku_stock,
+               t3.spec_value_list,
+               t3.`status` sku_status
+        FROM pms_spu t1
+                 LEFT JOIN pms_category t2 ON t1.category_id = t2.id
+                 LEFT JOIN pms_sku t3 ON t1.id = t3.spu_id
+    </sql>
+    <select id="selectSpuById" resultMap="SpuVOResultMap">
+        <include refid="selectSpu"/>
+        WHERE t1.id = #{spuId}
+    </select>
+
+
+    <select id="selectSpuPage" resultMap="SpuVOResultMap">
+        <include refid="selectSpu"/>
+        <where>
+            <if test="param.name != null and param.name != ''">
+                AND t1.`name` LIKE CONCAT('%',#{param.name},'%')
+            </if>
+            <if test="param.status != null">
+                AND t1.`status` = #{param.status}
+            </if>
+            <if test="param.categoryId != null">
+                AND t1.category_id = #{param.categoryId}
+            </if>
+        </where>
+    </select>
 </mapper>

@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -13,8 +14,7 @@ import java.util.List;
  * @version 1.0
  */
 @Data
-
-public class PageResult<T> {
+public class PageResult<T>  {
     private int code;
     private String msg;
     private PageData<T> data;
@@ -24,15 +24,15 @@ public class PageResult<T> {
         this.msg = msg;
         this.data = data;
     }
-
+    @Data
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class PageData<T> {
+    public static class PageData<T>  {
         private Long total;
         private List<T> records;
     }
 
-    public static <T> PageResult<T> success(IPage page) {
-        return new PageResult<>(HttpStatus.HTTP_OK,"请求成功",new PageData<>(page.getTotal(),page.getRecords()));
+    public static <T> PageResult<T> success(IPage <T>page) {
+        return new PageResult<>(HttpStatus.HTTP_OK,"请求成功",new PageData<T>(page.getTotal(),page.getRecords()));
     }
 }

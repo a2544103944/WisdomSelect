@@ -1,7 +1,7 @@
 package com.cjj.pms.mapper;
-
 import com.cjj.pms.pojo.entity.Sku;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
 * @author 25441
@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 * @createDate 2023-08-10 15:59:09
 * @Entity com.cjj.pms.pojo.entity.Sku
 */
+
 public interface SkuMapper extends BaseMapper<Sku> {
 
 }
